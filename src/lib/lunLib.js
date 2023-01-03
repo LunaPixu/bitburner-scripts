@@ -1,4 +1,3 @@
-/** @param {import("../../.").NS} ns */
 export { color, style, random, quickSort, quickSortObj };
 
 /**
@@ -7,7 +6,7 @@ export { color, style, random, quickSort, quickSortObj };
  *
  * Example: `color.red+"Warning: Bad stuff is happening!"` or `` `${color.green}Operation performed successfully!` ``
  * 
- * *Note: These formatting codes will override color codes and vice versa*
+ * *Note: These formatting codes will override color codes and vice versa.*
  */
 const color = {
 	reset: "\u001b[0m",

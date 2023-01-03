@@ -1,5 +1,5 @@
-import { getServerArray } from "/lib/CalcServers.js";
-import { color } from "/lib/lunAPI.js";
+import { getServerArray } from "./lib/calcServers.js";
+import { color } from "./lib/lunLib.js";
 
 /** @param {import("../.").NS} ns */
 export async function main(ns) {

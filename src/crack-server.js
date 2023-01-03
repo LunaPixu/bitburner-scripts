@@ -1,4 +1,4 @@
-import { color } from "/lib/lunAPI.js";
+import { color } from "./lib/lunLib.js";
 
 export function autocomplete(data, args) {
 	return [...data.servers];

@@ -1,5 +1,5 @@
-import { quickSortObj, color } from "/lib/lunAPI.js";
-import { getIncomeArray, getServerArray } from "/lib/CalcServers.js";
+import { quickSortObj, color } from "./lib/lunLib.js";
+import { getIncomeArray, getServerArray } from "./lib/calcServers.js";
 
 const f = [
 	["verbose", false],

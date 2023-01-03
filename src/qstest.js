@@ -1,4 +1,4 @@
-import { quickSort } from "/lib/lunAPI.js"
+import { quickSort } from "./lib/lunLib.js"
 
 /** @param {import("../.").NS} ns */
 export async function main(ns) {

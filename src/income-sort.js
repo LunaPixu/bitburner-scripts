@@ -1,5 +1,5 @@
-import { color, quickSortObj } from "/lib/lunAPI.js";
-import { getIncomeArray } from "/lib/CalcServers.js";
+import { color, quickSortObj } from "./lib/lunLib.js";
+import { getIncomeArray } from "./lib/calcServers.js";
 
 /** @param {import("../.").NS} ns */
 export async function main(ns) {
