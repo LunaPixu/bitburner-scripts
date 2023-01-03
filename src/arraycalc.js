@@ -1,4 +1,4 @@
-import {quickSortObj} from "./lib/lunLib.js"
+import {quickSortObj,randomInt} from "./lib/lunLib.js"
 
 /** @param {import("../.").NS} ns */
 export async function main(ns) {
@@ -10,22 +10,17 @@ export async function main(ns) {
 	let edmund = new Object();
 	let duke = new Object();
 
-	function random(min, max) {
-		const num = Math.floor(Math.random() * (max - min + 1)) + min;
-		return num;
-	}
-
-	joe.mon = random(1, 100);
+	joe.mon = randomInt(1, 100);
 	joe.name = "Joe";
-	mario.mon = random(1, 100);
+	mario.mon = randomInt(1, 100);
 	mario.name = "Mario";
-	francis.mon = random(1, 100);
+	francis.mon = randomInt(1, 100);
 	francis.name = "Francis";
-	limmy.mon = random(1, 100);
+	limmy.mon = randomInt(1, 100);
 	limmy.name = "Limmy";
-	edmund.mon = random(1, 100);
+	edmund.mon = randomInt(1, 100);
 	edmund.name = "Edmund";
-	duke.mon = random(1, 100);
+	duke.mon = randomInt(1, 100);
 	duke.name = "Duke";
 	tierlist.push(joe);
 	tierlist.push(mario);

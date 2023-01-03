@@ -8,20 +8,7 @@ export function autocomplete(data, args) {
 export async function main(ns) {
 	var dest = ns.args[0];
 	var numericalheader = ns.args[1];
-
-	let errorStr = "€Rror.$3r/veRc4NnoTe<rOrb3_Error%f0un#d"
-	let errorText = "";
-	const errorLength = errorStr.length;
-	let c;
-	for (c = 0; c < errorLength; c++) {
-		if ((c % 4) == 1) {
-			errorText = errorText + color.orange + errorStr[c];
-			continue;
-		}
-		errorText = errorText + color.red + errorStr[c];
-	}
-	errorText = color.red + "Error: " + errorText;
-
+	
 	if (!dest) {
 		ns.tprint(`${color.red}Error: Destination not specified.`);
 		ns.exit();
@@ -34,7 +21,20 @@ export async function main(ns) {
 	var route = [];
 	var i;
 	var fill = 1;
-
+	
+	let errorStr = "€Rror.$3r/veRc4NnoTe<rOrb3_Error%f0un#d"
+	let errorText = "";
+	const errorLength = errorStr.length;
+	let c;
+	for (c = 0; c < errorLength; c++) {
+		if ((c % 4) == 1) {
+			errorText += color.orange + errorStr[c];
+			continue;
+		}
+		errorText += color.red + errorStr[c];
+	}
+	errorText = color.red + "Error: " + errorText;
+	
 	ns.tprint(`${color.white}Route to this server is:`);
 
 	while (parent != "home") {

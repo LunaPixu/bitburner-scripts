@@ -1,4 +1,4 @@
-export { color, style, random, quickSort, quickSortObj };
+export { color, style, randomInt, quickSort, quickSortObj };
 
 /**
  * Provides a list of ANSI escape codes to provide color for printing.  
@@ -48,11 +48,11 @@ const style = {
 /**
  * Returns an integer (inclusively) between the `min` and `mix` numbers
  * 
- * @param {number} [min=1] Minimum number to roll for. Defaults to 1 if absent
+ * @param {number} [min=1] Minimum number to roll for. Defaults to 1 if absent.
  * @param {number} max Maximum number to roll for.
  * @return {number} The random number.
  */
-function random(min=1, max) {
+function randomInt(min=1, max) {
 	const num = Math.floor(Math.random() * (max - min + 1)) + min;
 	return num;
 }
