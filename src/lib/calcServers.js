@@ -1,5 +1,10 @@
-/** @param {import("../../.").NS} ns */
-export function calcPercent(server, ns) {
+/** 
+ * Returns the base percentage of a given server's money obtained from hacking, as a float.
+ * @param {import("../../.").NS} ns 
+ * @param {string} server The server you're evaluating.
+ * @returns The base percentage of a server's money obtained from hacking, as a float.
+*/
+export function calcPercent(ns, server) {
 	let player = ns.getPlayer();
 	const balanceFactor = 240;
 
@@ -17,8 +22,13 @@ export function calcPercent(server, ns) {
 	return percentMoneyHacked;
 }
 
-/** @param {NS} ns */
-export function calcTime(server, ns) {
+/** 
+ * Returns the base time to hack a given server, in seconds.
+ * @param {import("../../.").NS} ns
+ * @param {string} server The server you're evaluating.
+ * @returns The base time to hack a given server, in seconds.
+*/
+export function calcTime(ns, server) {
 	let player = ns.getPlayer();
 	const difficultyMult = ns.getServerRequiredHackingLevel(server) * (ns.getServerMinSecurityLevel(server) + 5);
 	const baseDiff = 500;
@@ -34,8 +44,13 @@ export function calcTime(server, ns) {
 	return hackingTime;
 }
 
-/** @param {NS} ns */
-export function calcChance(server, ns) {
+/**
+ * Returns the base percent chance of successfully hacking a given server, as a float.
+ * @param {import("../../.").NS} ns 
+ * @param {string} server The server you're evaluating
+ * @returns The base percent chance of successfully hacking a given server, as a float.
+*/
+export function calcChance(ns, server) {
 	let player = ns.getPlayer();
 	const hackFactor = 1.75;
 	const difficultyMult = (100 - (ns.getServerMinSecurityLevel(server) + 5)) / 100;
@@ -56,7 +71,11 @@ export function calcChance(server, ns) {
 	return chance;
 }
 
-/** @param {NS} ns */
+/** 
+ * Returns an array of server objects with income properties.
+ * @param {import("../../.").NS} ns
+ * @returns {array} An array of server objects with `name`, `income`, and `rate` properties. `name` is a string; the rest are numbers.
+*/
 export function getIncomeArray(ns) {
 	let listServers = [];
 	let host;
@@ -77,8 +96,8 @@ export function getIncomeArray(ns) {
 			} else {
 				let focus = children[i];
 
-				let income = Math.floor(ns.getServerMaxMoney(focus) * 0.75 * calcPercent(focus, ns) * calcChance(focus, ns));
-				let monpersec = Math.floor(income / calcTime(focus, ns));
+				let income = Math.floor(ns.getServerMaxMoney(focus) * 0.75 * calcPercent(ns, focus) * calcChance(ns, focus));
+				let monpersec = Math.floor(income / calcTime(ns, focus));
 				if (income > 0) {
 					let server = new Server(focus, income, monpersec);
 					listServers.push(server);
@@ -98,8 +117,8 @@ export function getIncomeArray(ns) {
 	for (host = 0; host < children.length; host++) {
 		let focus = children[host];
 
-		let income = Math.floor(ns.getServerMaxMoney(focus) * 0.75 * calcPercent(focus, ns) * calcChance(focus, ns));
-		let monpersec = Math.floor(income / calcTime(focus, ns));
+		let income = Math.floor(ns.getServerMaxMoney(focus) * 0.75 * calcPercent(ns, focus) * calcChance(ns, focus));
+		let monpersec = Math.floor(income / calcTime(ns, focus));
 		if (income > 0) {
 			let server = new Server(focus, income, monpersec);
 			listServers.push(server);
@@ -110,7 +129,11 @@ export function getIncomeArray(ns) {
 	return listServers;
 }
 
-/** @param {NS} ns */
+/**
+ * Returns an array of the names of all reachable servers.
+ * @param {import("../../.").NS} ns
+ * @returns {array} An array of the names of all reachable servers.
+*/
 export function getServerArray(ns) {
 	let arr = [];
 
