@@ -4,9 +4,9 @@ export { color, style, randomInt, quickSort, quickSortObj };
  * Provides a list of ANSI escape codes to provide color for printing.  
  * To use them, concatenate your code of choice before the text you wish to format.
  *
- * Example: `color.red+"Warning: Bad stuff is happening!"` or `` `${color.green}Operation performed successfully!` ``
- * 
- * *Note: These formatting codes will override color codes and vice versa.*
+ * *Note: These formatting codes will override style codes and vice versa.*
+ * @example color.red+"Warning: Bad stuff is happening!"
+ * @example `${color.green}Operation performed successfully!`
  */
 const color = {
 	reset: "\u001b[0m",
@@ -35,9 +35,9 @@ const color = {
  * Provides a list of ANSI escape codes to provide formatting for printing.  
  * To use them, concatenate your code of choice before the text you wish to format.
  *
- * Example: `style.bold+"I must emphasise this text!"` or `` `${style.underline}This is a header` ``
- * 
  * *Note: These formatting codes will override color codes and vice versa*
+ * @example style.bold+"I must emphasise this text!" 
+ * @example `${style.underline}This is a header`
  */
 const style = {
 	reset: "\u001b[0m",
@@ -82,11 +82,12 @@ function qsPartition(arr, low, high) { //Compare and swap
 }
 
 /**
- * Sorts an array of numbers.
+ * Sorts an array of numbers.  
+ * *Code lifted from {@link https://www.geeksforgeeks.org/quick-sort/ GeeksforGeeks}. Edited to have low default to 0.*
  * 
  * @param {array} arr The array to be sorted
- * @param {number} [low=0] The first index to sort from, usually the 0th.
- * @param {number} high The last index to sort with, ideally should be `arr.length - 1`.
+ * @param {number} [low=0] The first index to sort from, usually 0. Defaults to 0- if absent.
+ * @param {number} high The last index to sort with; ideally should be `arr.length - 1`.
  * @yields The sorted array `arr`
  */
 function quickSort(arr, low, high) {
@@ -117,12 +118,14 @@ function qsPartitionObj(arr, prop, low, high) { //Compare and swap for objects
 	return (i + 1);
 }
 /**
- * Sorts an array of objects by a given property.
+ * Sorts an array of objects by a given property.  
+ * *Underlying Quick Sort code from {@link https://www.geeksforgeeks.org/quick-sort/ GeeksforGeeks}.
+ * Edited to have the partition function compare index properties (because the indices are objects) instead of the indices themselves.*
  * 
  * @param {array} arr The array to be sorted
- * @param {string|number} prop The key to sort all objects by. Targetted property must be a number!
- * @param {number} [low=0] The first index to sort from, usually the 0th.
- * @param {number} high The last index to sort with, ideally should be `arr.length - 1`.
+ * @param {string|number} prop The key to sort all objects by. Targetted property must have a number value!
+ * @param {number} [low=0] The first index to sort from, usually 0. Defaults to 0 if absent.
+ * @param {number} high The last index to sort with; ideally should be `arr.length - 1`.
  * @yields The sorted array `arr`
  */
 function quickSortObj(arr, prop, low=0, high) {
