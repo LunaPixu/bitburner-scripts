@@ -1,10 +1,11 @@
+import {NS} from "../../index"
 /** 
  * Returns the base percentage of a given server's money obtained from hacking, as a float.
- * @param {import("../../.").NS} ns 
+ * @param {NS} ns 
  * @param {string} server The server you're evaluating.
  * @returns The base percentage of a server's money obtained from hacking, as a float.
 */
-export function calcPercent(ns, server) {
+export function calcPercent(ns:NS, server:string):number {
 	let player = ns.getPlayer();
 	const balanceFactor = 240;
 
@@ -28,7 +29,7 @@ export function calcPercent(ns, server) {
  * @param {string} server The server you're evaluating.
  * @returns The base time to hack a given server, in seconds.
 */
-export function calcTime(ns, server) {
+export function calcTime(ns:NS, server:string):number {
 	let player = ns.getPlayer();
 	const difficultyMult = ns.getServerRequiredHackingLevel(server) * (ns.getServerMinSecurityLevel(server) + 5);
 	const baseDiff = 500;
@@ -50,7 +51,7 @@ export function calcTime(ns, server) {
  * @param {string} server The server you're evaluating
  * @returns The base percent chance of successfully hacking a given server, as a float.
 */
-export function calcChance(ns, server) {
+export function calcChance(ns:NS, server:string):number {
 	let player = ns.getPlayer();
 	const hackFactor = 1.75;
 	const difficultyMult = (100 - (ns.getServerMinSecurityLevel(server) + 5)) / 100;
@@ -76,20 +77,24 @@ export function calcChance(ns, server) {
  * @param {import("../../.").NS} ns
  * @returns {array} An array of server objects with `name`, `income`, and `rate` properties. `name` is a string; the rest are numbers.
 */
-export function getIncomeArray(ns) {
+export function getIncomeArray(ns:NS) {
 	let listServers = [];
 	let host;
 	class Server {
-		constructor(name, income, rate) {
+		name:string;
+		income:number;
+		rate:number;
+
+		constructor(name:string, income:number, rate:number) {
 			this.name = name;
 			this.income = income;
 			this.rate = rate;
 		}
 	}
 
-	function rcalc(target) { // Define our recursive scan and income calc
+	function rcalc(target:string) { // Define our recursive scan and income calc
 		let children = ns.scan(target);
-		let i;
+		let i:number;
 		for (i = 1; i < children.length; i++) {
 			if (children.length == 1) {
 				break;
@@ -134,12 +139,12 @@ export function getIncomeArray(ns) {
  * @param {import("../../.").NS} ns
  * @returns {array} An array of the names of all reachable servers.
 */
-export function getServerArray(ns) {
+export function getServerArray(ns:NS) {
 	let arr = [];
 
-	function rscan(ns, target) {
+	function rscan(ns:NS, target:string) {
 		let children = ns.scan(target);
-		let i;
+		let i:number;
 		for (i = 1; i < children.length; i++) {
 			if (children.length == 1) {
 				break;
@@ -153,7 +158,7 @@ export function getServerArray(ns) {
 	}
 
 	let children = ns.scan("home");
-	let i;
+	let i:number;
 	for (i = 0; i < children.length; i++) {
 		let focus = children[i];
 

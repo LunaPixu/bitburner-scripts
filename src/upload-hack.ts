@@ -1,6 +1,8 @@
-/** @param {import("../.").NS} ns */
-export async function main(ns) {
-	var server = ns.args[0]; // Get server
+import {NS} from "../index";
+/** @param {NS} ns */
+export async function main(ns:NS) {
+	let server:any;
+	server = ns.args[0]; // Get server
 	var hackscript = "hack-script.js";
 
 	if (!server) { // Did a server get added?

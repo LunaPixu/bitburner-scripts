@@ -1,8 +1,10 @@
+import {NS} from "../index";
 import { color } from "./lib/lunLib.js";
 
-/** @param {import("../.").NS} ns */
-export async function main(ns) {
-	var ram = ns.args[0];
+/** @param {NS} ns */
+export async function main(ns:NS) {
+	let ram:any;
+	ram = ns.args[0];
 	var ignorepurchase = ns.args[1];
 	var referencedram;
 	let serverlimit = ns.getPurchasedServerLimit();
@@ -22,6 +24,7 @@ export async function main(ns) {
 			ns.exit();
 		}
 	}
+	ram = parseInt(ram)
 	if (Number.isInteger(Math.log2(ram)) == false) {
 		ns.tprint(color.red + "Error: Invalid RAM value entered.");
 		ns.exit();

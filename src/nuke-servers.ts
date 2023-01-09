@@ -1,7 +1,8 @@
-import { color } from "./lib/lunLib.js";
+import {NS} from "../index";
+import { color } from "/lib/lunLib.js";
 
-/** @param {import("../.").NS} ns */
-export async function main(ns) {
+/** @param {NS} ns */
+export async function main(ns:NS) {
 	if (!(await ns.prompt("Confirm deletion of servers?"))) {
 		ns.tprint(color.white + "Server deletion cancelled.");
 		ns.exit();

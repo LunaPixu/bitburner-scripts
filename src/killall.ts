@@ -1,16 +1,14 @@
-import { getServerArray } from "./lib/calcServers.js";
-import { color } from "./lib/lunLib.js";
+import {NS} from "../index";
+import { getServerArray } from "/lib/calcServers.js";
+import { color } from "/lib/lunLib.js";
 
-/** @param {import("../.").NS} ns */
-export async function main(ns) {
+/** @param {NS} ns */
+export async function main(ns:NS) {
 	if (!(await ns.prompt("You are about to kill all scripts on every server. Are you sure?"))) {
 		ns.tprint(color.aqua + "Cancelled.")
 		ns.exit();
 	}
 	let servers = getServerArray(ns);
-	let i;
-	for (i = 0; i < servers.length; i++) {
-		ns.killall(servers[i]);
-	}
+	servers.forEach(server => ns.killall(server));
 	ns.tprint(color.yellow+"All scripts on all other servers killed.")
 }

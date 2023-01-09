@@ -1,4 +1,4 @@
-import {NS} from "../index"
+import {NS} from "../index";
 import {color} from "./lib/lunLib.js";
 
 /** @param {NS} ns */

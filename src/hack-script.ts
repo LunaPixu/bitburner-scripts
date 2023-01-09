@@ -1,5 +1,6 @@
-/** @param {import("../.").NS} ns */
-export async function main(ns) {
+import {NS} from "../index";
+/** @param {NS} ns */
+export async function main(ns:NS) {
 	var target;
 	var hackskill = ns.getHackingLevel();
 

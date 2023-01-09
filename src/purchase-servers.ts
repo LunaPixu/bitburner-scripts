@@ -1,12 +1,14 @@
-import { color, quickSortObj } from "./lib/lunLib.js";
-import { getIncomeArray } from "./lib/calcServers.js";
+import {NS} from "../index";
+import { color, quickSortObj } from "/lib/lunLib.js";
+import { getIncomeArray } from "/lib/calcServers.js";
 
-/** @param {import("../.").NS} ns */
-export async function main(ns) {
-	var ram = ns.args[0];
-	var hackscript = "hack2.js";
-	var serverlimit = ns.getPurchasedServerLimit();
-	var skipprompt = ns.args[1];
+/** @param {NS} ns */
+export async function main(ns:NS) {
+	let ram:any;
+	ram = ns.args[0];
+	let hackscript = "hack2.js";
+	let serverlimit = ns.getPurchasedServerLimit();
+	let skipprompt = ns.args[1];
 
 	if (!ram) {
 		ns.tprint(`${color.red}Error: No RAM specified.`);

@@ -1,7 +1,7 @@
 export { color, style, randomInt, quickSort, quickSortObj };
 
 /**
- * Provides a list of ANSI escape codes to provide color for printing.  
+ * Provides a list of ANSI escape codes (https://en.wikipedia.org/wiki/ANSI_escape_code#Colors) to provide color for printing.  
  * To use them, concatenate your code of choice before the text you wish to format.
  *
  * *Note: These formatting codes will override style codes and vice versa.*
@@ -32,7 +32,7 @@ const color = {
 };
 
 /**
- * Provides a list of ANSI escape codes to provide formatting for printing.  
+ * Provides a list of ANSI escape codes (https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_(Select_Graphic_Rendition)_parameters) to provide formatting for printing.  
  * To use them, concatenate your code of choice before the text you wish to format.
  *
  * *Note: These formatting codes will override color codes and vice versa*
@@ -52,18 +52,18 @@ const style = {
  * @param {number} max Maximum number to roll for.
  * @return {number} The random number.
  */
-function randomInt(min=1, max) {
+function randomInt(min:number=1, max:number):number {
 	const num = Math.floor(Math.random() * (max - min + 1)) + min;
 	return num;
 }
 
-function qsSwap(arr, i, j) { //Define a function to swap entries in an array
+function qsSwap(arr:any[], i:number, j:number) { //Define a function to swap entries in an array
 	let temp = arr[i];
 	arr[i] = arr[j];
 	arr[j] = temp;
 }
 
-function qsPartition(arr, low, high) { //Compare and swap
+function qsPartition(arr:number[], low:number, high:number) { //Compare and swap
 
 	let pivot = arr[high];
 
@@ -90,7 +90,7 @@ function qsPartition(arr, low, high) { //Compare and swap
  * @param {number} high The last index to sort with; ideally should be `arr.length - 1`.
  * @yields The sorted array `arr`
  */
-function quickSort(arr, low, high) {
+function quickSort(arr:number[], low:number=0, high:number) {
 	if (low < high) { //If the algorithm has yet to terminate
 
 		let pi = qsPartition(arr, low, high);
@@ -100,7 +100,7 @@ function quickSort(arr, low, high) {
 	}
 }
 
-function qsPartitionObj(arr, prop, low, high) { //Compare and swap for objects
+function qsPartitionObj(arr:any[], prop:string|number, low:number, high:number) { //Compare and swap for objects
 
 	let pivot = arr[high][prop];
 
@@ -128,7 +128,7 @@ function qsPartitionObj(arr, prop, low, high) { //Compare and swap for objects
  * @param {number} high The last index to sort with; ideally should be `arr.length - 1`.
  * @yields The sorted array `arr`
  */
-function quickSortObj(arr, prop, low=0, high) {
+function quickSortObj(arr:any[], prop:string|number, low:number=0, high:number) {
 	if (low < high) {
 
 		let pi = qsPartitionObj(arr, prop, low, high);

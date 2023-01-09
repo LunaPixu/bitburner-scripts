@@ -1,3 +1,4 @@
+import {NS} from "../index";
 import { quickSortObj, color } from "./lib/lunLib.js";
 import { getIncomeArray, getServerArray } from "./lib/calcServers.js";
 
@@ -5,17 +6,20 @@ const f = [
 	["verbose", false],
 	["silent", false]
 ];
-export function autocomplete(data, args) {
+export function autocomplete(data:any, args:any[]) {
 	return [data.flags(f)];
 };
 
-/** @param {import("../.").NS} ns */
-export async function main(ns) {
+/** @param {NS} ns */
+export async function main(ns:NS) {
 	let servers = getServerArray(ns);
 	let tierlist = getIncomeArray(ns);
 	let hitlist = [];
 	let target;
-	let input = ns.flags(f);
+	let input = ns.flags([
+		["verbose", false],
+		["silent", false]
+	]);
 	let verbose = input.verbose;
 	let silent = input.silent;
 	if (silent) {

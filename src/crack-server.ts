@@ -1,12 +1,14 @@
+import {NS} from "../index";
 import { color } from "./lib/lunLib.js";
 
-export function autocomplete(data, args) {
+export function autocomplete(data:any, args:any) {
 	return [...data.servers];
 };
 
 /** @param {import("../.").NS} ns */
-export async function main(ns) {
-	let server = ns.args[0];
+export async function main(ns:NS) {
+	let server:any;
+	server = ns.args[0];
 	let ports = ns.getServerNumPortsRequired(server);
 
 	if (!server) {

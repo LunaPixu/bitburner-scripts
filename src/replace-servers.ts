@@ -1,9 +1,11 @@
+import {NS} from "../index";
 import { color } from "./lib/lunLib.js";
 
-/** @param {import("../.").NS} ns */
-export async function main(ns) {
+/** @param {NS} ns */
+export async function main(ns:NS) {
 	var i = 0;
-	var ram = ns.args[0];
+	let ram:any;
+	ram = ns.args[0];
 	var skipprompt = ns.args[1];
 	var serverlimit = ns.getPurchasedServerLimit();
 	var fcost = ns.nFormat((ns.getPurchasedServerCost(ram) * serverlimit), "$0.000a");

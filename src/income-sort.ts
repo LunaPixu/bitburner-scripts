@@ -1,8 +1,9 @@
-import { color, quickSortObj } from "./lib/lunLib.js";
-import { getIncomeArray } from "./lib/calcServers.js";
+import {NS} from "../index";
+import { color, quickSortObj } from "/lib/lunLib.js";
+import { getIncomeArray } from "/lib/calcServers.js";
 
-/** @param {import("../.").NS} ns */
-export async function main(ns) {
+/** @param {NS} ns */
+export async function main(ns:NS) {
 	let listServers = getIncomeArray(ns);
 
 	quickSortObj(listServers, "rate", 0, listServers.length - 1);

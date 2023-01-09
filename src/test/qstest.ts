@@ -1,5 +1,5 @@
-import {NS} from "../../index"
-import { quickSort } from "/lib/lunLib.js"
+import {NS} from "../../index";
+import { quickSort } from "/lib/lunLib.js";
 
 /** @param {NS} ns */
 export async function main(ns:NS) {

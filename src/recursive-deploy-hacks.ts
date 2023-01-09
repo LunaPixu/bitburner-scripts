@@ -1,19 +1,22 @@
+import {NS} from "../index";
 import {color} from "./lib/lunLib.js";
 
 const f = [
 	["verbose", false]
 ];
-export function autocomplete(data, args) {
+export function autocomplete(data:any, args:any) {
 	return [data.flags(f)];
 };
 
-/** @param {import("../.").NS} ns */
-export async function main(ns) {
-	let input = ns.flags(f);
+/** @param {NS} ns */
+export async function main(ns:NS) {
+	let input = ns.flags([
+		["verbose", false]
+	]);
 	const hackscript = "hack-script.js";
 	let verbose = input.verbose;
 
-	async function rdeploy(host) {
+	async function rdeploy(host:string) {
 		let servers = ns.scan(host);
 		let i;
 		let server;
