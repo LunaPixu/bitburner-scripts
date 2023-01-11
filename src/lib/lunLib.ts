@@ -85,7 +85,7 @@ function qsPartition(arr:number[], low:number, high:number) { //Compare and swap
  * Sorts an array of numbers.  
  * *Code lifted from {@link https://www.geeksforgeeks.org/quick-sort/ GeeksforGeeks}. Edited to have low default to 0.*
  * 
- * @param {array} arr The array to be sorted
+ * @param {number[]} arr The array to be sorted
  * @param {number} [low=0] The first index to sort from, usually 0. Defaults to 0- if absent.
  * @param {number} high The last index to sort with; ideally should be `arr.length - 1`.
  * @yields The sorted array `arr`
@@ -122,7 +122,7 @@ function qsPartitionObj(arr:any[], prop:string|number, low:number, high:number) 
  * *Underlying Quick Sort code from {@link https://www.geeksforgeeks.org/quick-sort/ GeeksforGeeks}.
  * Edited to have the partition function compare index properties (because the indices are objects) instead of the indices themselves.*
  * 
- * @param {array} arr The array to be sorted
+ * @param {any[]} arr The array to be sorted
  * @param {string|number} prop The key to sort all objects by. Targetted property must have a number value!
  * @param {number} [low=0] The first index to sort from, usually 0. Defaults to 0 if absent.
  * @param {number} high The last index to sort with; ideally should be `arr.length - 1`.
