@@ -11,9 +11,9 @@ export async function main(ns:NS) {
 	if (!ram) {
 		if (ns.serverExists("pserv-0")) {
 			ram = 2 * ns.getServerMaxRam("pserv-0");
-			ns.tprint(color.orange + "Alert: RAM not definied. Attempting to use pre-existing server as reference instead...");
+			ns.tprint(color.yellow + "Alert: RAM not defined. Attempting to use pre-existing server as reference instead...");
 			if (ram > ns.getPurchasedServerMaxRam()) {
-				ns.tprint(color.orange + "Alert: Referenced RAM is already at maximum. Upgrading is impossible at this time.");
+				ns.tprint(color.orange + "Warning: Referenced RAM is already at maximum. Upgrading is impossible at this time.");
 				ns.exit();
 			}
 			referencedram = true;
