@@ -16,8 +16,7 @@ export async function main(ns:NS) {
 		["numericheader", false]
 	]);
 	
-	let layers:any;
-	layers = input.layers; // How deep are we going?
+	let layers = input.layers; // How deep are we going?
 	let host;
 	let fill = 1;
 	if (!Number.isInteger(layers)) {
@@ -26,6 +25,37 @@ export async function main(ns:NS) {
 	}
 	var numericheader = input.numericheader;
 
+	if (typeof layers === "number") {
+		if (layers === 1) {
+			ns.tprint(`${color.pink}Pointlessly scanning servers for 1 layer.`);
+		} else {
+			ns.tprint(`${color.white}Recursively scanning servers for a max of ${layers} layers.`);
+		}
+		
+		let servers = ns.scan("home");
+		if (ns.serverExists("darkweb")) { // Cut the first scan's results to omit purchased servers depending on if we have TOR access
+			servers.length = 8;
+		} else {
+			servers.length = 7;
+		}
+		for (host = 0; host < servers.length; host++) {
+			ns.print(servers[host]);
+			if (numericheader) {
+				ns.tprint(color.lightgray + "[" + color.aqua + `${fill}` + color.lightgray + `] ` + servers[host]);
+			} else {
+				ns.tprint(`${color.lightgray}- ` + servers[host]);
+			}
+			if (layers > 1) {
+				rscan(servers[host], layers - 2, 2);
+			}
+		}
+		if (layers == 1) {
+			ns.tprint(`${color.pink}Next time, just type "scan"...`);
+		}
+	} else {
+		ns.tprint(`${color.red}Error: Layer depth must be specified as a number!`);
+	}
+	
 	function rscan(target:string, z:number, fill:number) { // Algorithm to scan a target and recursively scan its results "z" more times
 		let servers = ns.scan(target); // Scan and get results
 		let i;
@@ -52,32 +82,5 @@ export async function main(ns:NS) {
 				rscan(servers[i], z, fill); // Go deeper
 			}
 		}
-	}
-
-	if (layers == 1) {
-		ns.tprint(`${color.pink}Pointlessly scanning servers for 1 layer.`);
-	} else {
-		ns.tprint(`${color.white}Recursively scanning servers for a max of ${layers} layers.`);
-	}
-
-	let servers = ns.scan("home");
-	if (ns.serverExists("darkweb")) { // Cut the first scan's results to omit purchased servers depending on if we have TOR access
-		servers.length = 8;
-	} else {
-		servers.length = 7;
-	}
-	for (host = 0; host < servers.length; host++) {
-		ns.print(servers[host]);
-		if (numericheader) {
-			ns.tprint(color.lightgray + "[" + color.aqua + `${fill}` + color.lightgray + `] ` + servers[host]);
-		} else {
-			ns.tprint(`${color.lightgray}- ` + servers[host]);
-		}
-		if (layers > 1) {
-			rscan(servers[host], layers - 2, 2);
-		}
-	}
-	if (layers == 1) {
-		ns.tprint(`${color.pink}Next time, just type "scan"...`)
 	}
 }
