@@ -3,4 +3,4 @@ dist/
 NetscriptDefinitions.d.ts
 index.d.ts
 .vscode/
-src/template.ts
+src/new.ts
