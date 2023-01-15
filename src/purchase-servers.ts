@@ -1,37 +1,27 @@
 import {NS} from "../index";
 import { color, quickSortObj } from "/lib/lunLib.js";
 import { getIncomeArray } from "/lib/calcServers.js";
+import printExit from "/lib/printExit.js";
 
 /** @param {NS} ns */
 export async function main(ns:NS) {
 	let ram = ns.args[0];
 	let hackscript = "hack2.js";
-	let serverlimit = ns.getPurchasedServerLimit();
-	let skipprompt = ns.args[1];
+	let serverLimit = ns.getPurchasedServerLimit();
+	let skipPrompt = ns.args[1];
 
-	if (!ram) {
-		ns.tprint(`${color.red}Error: No RAM specified.`);
-		ns.exit();
-	} else if (ram > ns.getPurchasedServerMaxRam()) {
-		ns.tprint(`${color.red}Error: Specified RAM is too large to be purchased.`);
-		ns.exit();
-	}
-	if (ns.serverExists("pserv-" + (serverlimit - 1))) {
-		ns.tprint(`${color.orange}Alert: We already have servers. Please run the replace server script instead.`);
-		ns.exit();
-	}
+	if (!ram) printExit(ns, `${color.red}Error: No RAM specified.`, true);
+
+	if (ram > ns.getPurchasedServerMaxRam()) printExit(ns, `${color.red}Error: Specified RAM is too large to be purchased.`, true);
+
+	if (ns.serverExists("pserv-" + (serverLimit - 1))) printExit(ns, `${color.orange}Alert: We already have servers. Please run the replace server script instead.`, true);
 
 	if (typeof ram === "number") {
-		if (!Number.isInteger(Math.log2(ram))) {
-			ns.tprint(`${color.red}Error: Invalid RAM entered.`);
-			ns.exit();
-		}
+		if (!Number.isInteger(Math.log2(ram))) printExit(ns, `${color.red}Error: Invalid RAM entered.`, true);
 
-		if (!skipprompt) {
-			if (!await ns.prompt(`Purchasing ${serverlimit} servers with ${ram}GB of RAM will cost \$${ns.nFormat(ns.getPurchasedServerCost(ram) * serverlimit, "0,0")}. Do you wish to proceed?`)) {
-				ns.tprint("Purchase cancelled.");
-				ns.exit();
-			}
+		if (!skipPrompt) {
+			let promptMsg = `Purchasing ${serverLimit} servers with ${ram}GB of RAM will cost \$${ns.nFormat(ns.getPurchasedServerCost(ram) * serverLimit, "0,0")}. Do you wish to proceed?`
+			if (!await ns.prompt(promptMsg)) printExit(ns, color.white + "Purchase cancelled.", true);
 		}
 		
 		let i = 0;
@@ -39,7 +29,7 @@ export async function main(ns:NS) {
 		let hitlist = calcOrderedServers();
 		let target:string;
 
-		while (i < serverlimit) {
+		while (i < serverLimit) {
 			target = hitlist[i % hitlist.length];
 			if (ns.getServerMoneyAvailable("home") > ns.getPurchasedServerCost(ram)) {
 				var hostname = ns.purchaseServer("pserv-" + i, ram);
@@ -49,10 +39,9 @@ export async function main(ns:NS) {
 			}
 			await ns.sleep(50);
 		}
-		ns.tprint(`${color.green}Purchased ${serverlimit} servers with ${ram}GB of RAM for ${ns.nFormat(ns.getPurchasedServerCost(ram) * serverlimit, "$0.000a")}`)
+		ns.tprint(`${color.green}Purchased ${serverLimit} servers with ${ram}GB of RAM for ${ns.nFormat(ns.getPurchasedServerCost(ram) * serverLimit, "$0.000a")}`)
 	} else {
-		ns.tprint(`${color.red}Error: RAM must be entered as a number.`);
-		ns.exit();
+		printExit(ns, `${color.red}Error: RAM must be entered as a number.`, true);
 	}
 
 	function calcOrderedServers() {

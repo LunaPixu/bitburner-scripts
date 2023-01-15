@@ -1,5 +1,6 @@
 import {NS} from "../index";
-import { color } from "./lib/lunLib.js";
+import { color } from "/lib/lunLib.js";
+import printExit from "/lib/printExit.js";
 
 export function autocomplete(data:any, args:any) {
 	return [...data.servers];
@@ -10,15 +11,10 @@ export async function main(ns:NS) {
 	let dest = ns.args[0];
 	let numericalheader = ns.args[1];
 	
-	if (!dest) {
-		ns.tprint(`${color.red}Error: Destination server not specified.`);
-		ns.exit();
-	}
+	if (!dest) printExit(ns, `${color.red}Error: Destination server not specified.`, true);
+
 	if (typeof dest === "string") {
-		if (!ns.serverExists(dest)) {
-			ns.tprint(`${color.red}Error: Destination server is not a valid server.`);
-			ns.exit();
-		}
+		if (!ns.serverExists(dest)) printExit(ns, `${color.red}Error: Destination server is not a valid server.`, true);
 		
 		let errorStr = "€Rror.$3r/veRc4NnoTe<rOrb3_Error%f0un#d"
 		let errorText = "";
@@ -63,7 +59,6 @@ export async function main(ns:NS) {
 			ns.tprint(`${color.lightgray}${`-`.repeat(fill)} ${dest}`)
 		}
 	} else {
-		ns.tprint(`${color.red}Error: Destination server must be specified as a string!`);
-		ns.exit();
+		printExit(ns, `${color.red}Error: Destination server must be specified as a string!`, true);
 	}
 }
