@@ -6,7 +6,7 @@ import {NS} from "../../index";
  * @param {string} message Error message to print
  * @param {boolean} terminal If true, print message to terminal.
 */
-export default function(ns:NS, message:string, terminal?:boolean):void {
+export default function(ns:NS, message:string, terminal:boolean=false):void {
   ns.print(message);
   if (terminal) ns.tprint(message);
   ns.exit();
