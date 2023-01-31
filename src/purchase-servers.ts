@@ -1,6 +1,6 @@
 import {NS} from "../index";
 import { color, quickSortObj } from "/lib/lunLib.js";
-import { getIncomeArray } from "/lib/calcServers.js";
+import { getServObjArray } from "/lib/serverArray.js";
 import printExit from "/lib/printExit.js";
 
 /** @param {NS} ns */
@@ -45,7 +45,7 @@ export async function main(ns:NS) {
 	}
 
 	function calcOrderedServers() {
-		let tierlist = getIncomeArray(ns);
+		let tierlist = getServObjArray(ns);
 		quickSortObj(tierlist, "rate", 0, tierlist.length - 1);
 		let out = [];
 	

@@ -1,5 +1,5 @@
 import {NS} from "../index";
-import { getServerArray } from "/lib/calcServers.js";
+import { getServerArray } from "/lib/serverArray.js";
 import { color } from "/lib/lunLib.js";
 
 /** @param {NS} ns */

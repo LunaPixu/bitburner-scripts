@@ -1,6 +1,6 @@
 import {NS} from "../index";
 import { quickSortObj, color } from "./lib/lunLib.js";
-import { getIncomeArray, getServerArray } from "./lib/calcServers.js";
+import { getServObjArray, getServerArray } from "./lib/serverArray.js";
 
 const f = [
 	["verbose", false],
@@ -13,7 +13,7 @@ export function autocomplete(data:any, args:any[]) {
 /** @param {NS} ns */
 export async function main(ns:NS) {
 	let servers = getServerArray(ns);
-	let tierlist = getIncomeArray(ns);
+	let tierlist = getServObjArray(ns);
 	let hitlist = [];
 	let target;
 	let input = ns.flags([

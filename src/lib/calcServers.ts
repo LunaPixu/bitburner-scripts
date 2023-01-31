@@ -1,4 +1,4 @@
-import {NS} from "../../index"
+import {NS} from "../../index";
 /** 
  * Returns the base percentage of a given server's money obtained from hacking, as a float.
  * @param {NS} ns 
@@ -68,102 +68,5 @@ export function calcChance(ns:NS, server:string):number {
 	if (chance < 0) {
 		return 0;
 	}
-
 	return chance;
-}
-
-/** 
- * Returns an array of server objects with income properties.
- * @param {import("../../.").NS} ns
- * @returns {array} An array of server objects with `name`, `income`, and `rate` properties. `name` is a string; the rest are numbers.
-*/
-export function getIncomeArray(ns:NS) {
-	let listServers = [];
-	let host;
-	class Server {
-		name:string;
-		income:number;
-		rate:number;
-
-		constructor(name:string, income:number, rate:number) {
-			this.name = name;
-			this.income = income;
-			this.rate = rate;
-		}
-	}
-
-	function rcalc(target:string) { // Define our recursive scan and income calc
-		let children = ns.scan(target);
-		let i:number;
-		for (i = 1; i < children.length; i++) {
-			if (children.length == 1) {
-				break;
-			} else {
-				let focus = children[i];
-
-				let income = Math.floor(ns.getServerMaxMoney(focus) * 0.75 * calcPercent(ns, focus) * calcChance(ns, focus));
-				let monpersec = Math.floor(income / calcTime(ns, focus));
-				if (income > 0) {
-					let server = new Server(focus, income, monpersec);
-					listServers.push(server);
-				}
-				ns.print(focus + " - Income: $" + income);
-				rcalc(focus);
-			}
-		}
-	}
-
-	let children = ns.scan("home");
-	if (ns.serverExists("darkweb")) { // Cut the first scan's results to omit darkweb (if present) and purchased servers
-		children.length = 7;
-	} else {
-		children.length = 6;
-	}
-	for (host = 0; host < children.length; host++) {
-		let focus = children[host];
-
-		let income = Math.floor(ns.getServerMaxMoney(focus) * 0.75 * calcPercent(ns, focus) * calcChance(ns, focus));
-		let monpersec = Math.floor(income / calcTime(ns, focus));
-		if (income > 0) {
-			let server = new Server(focus, income, monpersec);
-			listServers.push(server);
-		}
-		ns.print(focus + " - Income: $" + income);
-		rcalc(focus);
-	}
-	return listServers;
-}
-
-/**
- * Returns an array of the names of all reachable servers.
- * @param {import("../../.").NS} ns
- * @returns {array} An array of the names of all reachable servers.
-*/
-export function getServerArray(ns:NS) {
-	let arr = [];
-
-	function rscan(ns:NS, target:string) {
-		let children = ns.scan(target);
-		let i:number;
-		for (i = 1; i < children.length; i++) {
-			if (children.length == 1) {
-				break;
-			} else {
-				let focus = children[i];
-
-				arr.push(focus);
-				rscan(ns,focus);
-			}
-		}
-	}
-
-	let children = ns.scan("home");
-	let i:number;
-	for (i = 0; i < children.length; i++) {
-		let focus = children[i];
-
-		arr.push(focus);
-		rscan(ns, focus);
-	}
-	return arr;
 }
