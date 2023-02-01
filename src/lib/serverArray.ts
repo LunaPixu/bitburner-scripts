@@ -1,12 +1,12 @@
 import {NS} from "../../index";
-import {Server} from "lib/Server.js";
+import {DynamicServer} from "/lib/DynamicServer.js";
 
 /** 
  * Returns an array of Server objects with income and rate properties.
  * @param {import("../../.").NS} ns
  * @returns {Array} An array of Server objects.
 */
-export function getServObjArray(ns:NS): Server[] {
+export function getServObjArray(ns:NS): DynamicServer[] {
 	let listServers = [];
 	let host;
 
@@ -19,7 +19,7 @@ export function getServObjArray(ns:NS): Server[] {
 			} else {
 				let focus = children[i];
 
-				let server = new Server(ns, focus);
+				let server = new DynamicServer(ns, focus);
 				if (server.income > 0) {
 					listServers.push(server);
 				}
@@ -38,7 +38,7 @@ export function getServObjArray(ns:NS): Server[] {
 	for (host = 0; host < children.length; host++) {
 		let focus = children[host];
 
-		let server = new Server(ns, focus);
+		let server = new DynamicServer(ns, focus);
 		if (server.income > 0) {
 			listServers.push(server);
 		}
