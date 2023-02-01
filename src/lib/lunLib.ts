@@ -88,7 +88,6 @@ function qsPartition(arr:number[], low:number, high:number) { //Compare and swap
  * @param {number[]} arr The array to be sorted
  * @param {number} [low=0] The first index to sort from, usually 0. Defaults to 0- if absent.
  * @param {number} high The last index to sort with; ideally should be `arr.length - 1`.
- * @yields The sorted array `arr`
  */
 function quickSort(arr:number[], low:number=0, high:number) {
 	if (low < high) { //If the algorithm has yet to terminate
@@ -126,7 +125,6 @@ function qsPartitionObj(arr:any[], prop:string|number, low:number, high:number) 
  * @param {string|number} prop The key to sort all objects by. Targetted property must have a number value!
  * @param {number} [low=0] The first index to sort from, usually 0. Defaults to 0 if absent.
  * @param {number} high The last index to sort with; ideally should be `arr.length - 1`.
- * @yields The sorted array `arr`
  */
 function quickSortObj(arr:any[], prop:string|number, low:number=0, high:number) {
 	if (low < high) {
