@@ -11,7 +11,7 @@ export async function main(ns:NS) {
 	let i;
 	for (i = 0; i < listServers.length; i++) {
 		ns.tprint(color.lightgray + "[" + color.aqua + (i + 1) + color.lightgray + "] " + listServers[i].name +
-			` - Average cash per second: ${color.green}${ns.nFormat(listServers[i].rate, "$0.000a")}/sec${color.lightgray};` +
-			` Average cash per single-threaded hack: ${color.green}${ns.nFormat(listServers[i].income, "$0.000a")}`);
+			` - Average cash per second: ${color.green}$${ns.formatNumber(listServers[i].rate)}/sec${color.lightgray};` +
+			` Average cash per single-threaded hack: ${color.green}$${ns.formatNumber(listServers[i].income)}`);
 	}
 }

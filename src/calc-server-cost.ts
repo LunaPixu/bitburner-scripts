@@ -29,9 +29,9 @@ export async function main(ns:NS) {
 		let tCost = ns.getPurchasedServerLimit() * ns.getPurchasedServerCost(ram);
 
 		if (referencedram) {
-			ns.tprint(`${color.white}The next server upgrade is at ${ram}GB. Replacing ${ns.getPurchasedServerLimit()} servers will cost: ${color.green}${ns.nFormat(tCost, "$0.000a")}`)
+			ns.tprint(`${color.white}The next server upgrade is at ${ram}GB. Replacing ${ns.getPurchasedServerLimit()} servers will cost: ${color.green}$${ns.formatNumber(tCost)}`)
 		} else {
-			ns.tprint(`${color.white}Purchasing ${ns.getPurchasedServerLimit()} servers with ${ram}GB of RAM will cost: ${color.green}${ns.nFormat(tCost, "$0.000a")}`);
+			ns.tprint(`${color.white}Purchasing ${ns.getPurchasedServerLimit()} servers with ${ram}GB of RAM will cost: ${color.green}$${ns.formatNumber(tCost)}`);
 		}
 
 		if (ns.getServerMoneyAvailable("home") > tCost) {

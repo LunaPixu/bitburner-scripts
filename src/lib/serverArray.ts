@@ -23,7 +23,7 @@ export function getServObjArray(ns:NS): DynamicServer[] {
 				if (server.income > 0) {
 					listServers.push(server);
 				}
-				ns.print(focus + " - Income: $" + ns.nFormat(server.income, "$0.000a"));
+				ns.print(focus + " - Income: $" + ns.formatNumber(server.income));
 				rcalc(focus);
 			}
 		}
@@ -42,7 +42,7 @@ export function getServObjArray(ns:NS): DynamicServer[] {
 		if (server.income > 0) {
 			listServers.push(server);
 		}
-		ns.print(focus + " - Income: $" + ns.nFormat(server.income, "$0.000a"));
+		ns.print(focus + " - Income: $" + ns.formatNumber(server.income));
 		rcalc(focus);
 	}
 	return listServers;

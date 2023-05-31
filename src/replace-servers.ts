@@ -11,7 +11,7 @@ export async function main(ns:NS) {
 	if (!ram) printExit(ns, `${color.red}Error: No RAM value specified.`, true);
 
 	if (typeof ram === "number") {
-		var fCost = ns.nFormat((ns.getPurchasedServerCost(ram) * serverLimit), "$0.000a");
+		var fCost = `$${ns.formatNumber((ns.getPurchasedServerCost(ram) * serverLimit))}`;
 
 		if (!Number.isInteger(Math.log2(ram))) printExit(ns, `${color.red}Error: Invalid RAM value specified.`, true);
 

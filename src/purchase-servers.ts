@@ -12,15 +12,15 @@ export async function main(ns:NS) {
 
 	if (!ram) printExit(ns, `${color.red}Error: No RAM specified.`, true);
 
-	if (ram > ns.getPurchasedServerMaxRam()) printExit(ns, `${color.red}Error: Specified RAM is too large to be purchased.`, true);
-
+	
 	if (ns.serverExists("pserv-" + (serverLimit - 1))) printExit(ns, `${color.orange}Alert: We already have servers. Please run the replace server script instead.`, true);
-
+	
 	if (typeof ram === "number") {
+		if (ram > ns.getPurchasedServerMaxRam()) printExit(ns, `${color.red}Error: Specified RAM is too large to be purchased.`, true);
 		if (!Number.isInteger(Math.log2(ram))) printExit(ns, `${color.red}Error: Invalid RAM entered.`, true);
 
 		if (!skipPrompt) {
-			let promptMsg = `Purchasing ${serverLimit} servers with ${ram}GB of RAM will cost \$${ns.nFormat(ns.getPurchasedServerCost(ram) * serverLimit, "0,0")}. Do you wish to proceed?`
+			let promptMsg = `Purchasing ${serverLimit} servers with ${ram}GB of RAM will cost \$${ns.formatNumber(ns.getPurchasedServerCost(ram) * serverLimit)}. Do you wish to proceed?`
 			if (!await ns.prompt(promptMsg)) printExit(ns, color.white + "Purchase cancelled.", true);
 		}
 		
@@ -39,7 +39,7 @@ export async function main(ns:NS) {
 			}
 			await ns.sleep(50);
 		}
-		ns.tprint(`${color.green}Purchased ${serverLimit} servers with ${ram}GB of RAM for ${ns.nFormat(ns.getPurchasedServerCost(ram) * serverLimit, "$0.000a")}`)
+		ns.tprint(`${color.green}Purchased ${serverLimit} servers with ${ram}GB of RAM for $${ns.formatNumber(ns.getPurchasedServerCost(ram) * serverLimit)}`)
 	} else {
 		printExit(ns, `${color.red}Error: RAM must be entered as a number.`, true);
 	}
